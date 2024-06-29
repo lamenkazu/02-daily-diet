@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { Meal } from "@/screens/Meal";
 import { Home } from "@/screens/Home";
+import { Meal } from "@/screens/Meal";
 import { NewMeal } from "@/screens/NewMeal";
 
 const { Navigator, Screen } = createNativeStackNavigator();
