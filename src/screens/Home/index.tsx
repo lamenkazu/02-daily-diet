@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import { MealList } from "./components/MealList";
 import {
   Container,
@@ -10,10 +11,16 @@ import {
 import { Header } from "@/components/Header";
 
 export const Home = () => {
+  const { navigate } = useNavigation();
+
+  const goToStatisticsScreen = () => {
+    navigate("statistics", { variant: "negative" });
+  };
+
   return (
     <Container>
       <Header />
-      <Statistic>
+      <Statistic onPress={goToStatisticsScreen}>
         <StatisticIcon />
         <StatisticTitle>90,86%</StatisticTitle>
         <StatisticSubtitle>das refeições dentro da dieta</StatisticSubtitle>

@@ -55,7 +55,21 @@ export const Title = styled.Text`
   `}
 `;
 
-export const BackIcon = styled(ArrowLeft).attrs(({ theme }) => ({
-  color: theme.colors.gray_200,
-  size: 24,
-}))``;
+export const BackIcon = styled(ArrowLeft).attrs<ButtonStyleProps>(
+  ({ theme, variant }) => {
+    let color = theme.colors.gray_200;
+
+    if (variant === "positive") {
+      color = theme.colors.green_dark;
+    }
+
+    if (variant === "negative") {
+      color = theme.colors.red_dark;
+    }
+
+    return {
+      color,
+      size: 24,
+    };
+  }
+)``;

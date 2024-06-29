@@ -12,9 +12,10 @@ import logo from "@/assets/logo.png";
 
 interface HeaderProps {
   variant?: HeaderVariant;
+  title?: string;
 }
 
-export const Header = ({ variant = "base" }: HeaderProps) => {
+export const Header = ({ variant = "base", title }: HeaderProps) => {
   return (
     <Container variant={variant}>
       {variant === "base" ? (
@@ -24,8 +25,8 @@ export const Header = ({ variant = "base" }: HeaderProps) => {
         </>
       ) : (
         <>
-          <BackIcon />
-          <Title>Nova refeição</Title>
+          <BackIcon variant={variant} />
+          <Title>{title}</Title>
           <View />
         </>
       )}
