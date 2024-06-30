@@ -16,6 +16,8 @@ export const Container = styled.View<ButtonStyleProps>`
   justify-content: space-between;
   padding: 33px 0 0;
 
+  padding: 33px 24px 0;
+
   ${({ theme, variant }) => {
     switch (variant) {
       case "base":

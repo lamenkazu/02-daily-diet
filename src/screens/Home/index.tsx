@@ -14,7 +14,7 @@ export const Home = () => {
   const { navigate } = useNavigation();
 
   const goToStatisticsScreen = () => {
-    navigate("statistics", { variant: "negative" });
+    navigate("statistics", { variant: "positive" });
   };
 
   return (

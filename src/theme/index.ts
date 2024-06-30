@@ -17,17 +17,17 @@ export default {
     gray_300: "#5C6265",
     gray_200: "#333638",
     gray_100: "#1B1D1E",
-  },
+  } as const,
   fontFamily: {
     regular: "NunitoSans_400Regular",
     bold: "NunitoSans_700Bold",
-  },
+  } as const,
   fontSize: {
-    XS: '12px',
+    XS: "12px",
     SM: "14px",
     MD: "16px",
     LG: "18px",
     XL: "24px",
     XXL: "32px",
-  },
+  } as const,
 };
