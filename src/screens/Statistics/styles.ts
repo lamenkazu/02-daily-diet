@@ -1,7 +1,6 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import styled from "styled-components/native";
 import { css } from "styled-components/native";
-import { CardContainer } from "./components/StatisticCard/styles";
 
 interface ContainerProps {
   variant: "positive" | "negative";

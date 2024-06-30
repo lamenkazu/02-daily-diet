@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import {
   BackIcon,
   Container,
@@ -9,6 +9,7 @@ import {
 } from "./styles";
 
 import logo from "@/assets/logo.png";
+import { useNavigation } from "@react-navigation/native";
 
 interface HeaderProps {
   variant?: HeaderVariant;
@@ -16,6 +17,12 @@ interface HeaderProps {
 }
 
 export const Header = ({ variant = "base", title }: HeaderProps) => {
+  const { goBack } = useNavigation();
+
+  const handleGoBack = () => {
+    goBack();
+  };
+
   return (
     <Container variant={variant}>
       {variant === "base" ? (
@@ -25,8 +32,13 @@ export const Header = ({ variant = "base", title }: HeaderProps) => {
         </>
       ) : (
         <>
-          <BackIcon variant={variant} />
+          <TouchableOpacity onPress={handleGoBack}>
+            <BackIcon variant={variant} />
+          </TouchableOpacity>
+
           <Title>{title}</Title>
+
+          {/* Empty View para ganhar espaço na tela */}
           <View />
         </>
       )}
