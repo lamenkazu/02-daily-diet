@@ -69,4 +69,15 @@ export const DietStatus = styled.View<MealProps>`
   background-color: ${({ theme, variant }) =>
     variant === "positive" ? theme.colors.green_dark : theme.colors.red_dark};
 `;
-export const DietText = styled.Text``;
+export const DietText = styled.Text`
+  ${({ theme }) => css`
+    font-family: ${theme.fontFamily.regular};
+    font-size: ${theme.fontSize.SM};
+  `}
+`;
+
+export const ButtonWrapper = styled.View`
+  gap: 8px;
+
+  margin-top: 85%;
+`;

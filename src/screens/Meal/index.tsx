@@ -1,5 +1,9 @@
+import PencilSimpleLine from "phosphor-react-native/src/icons/PencilSimpleLine";
+import Trash from "phosphor-react-native/src/icons/Trash";
+
 import { useRoute } from "@react-navigation/native";
 import {
+  ButtonWrapper,
   Container,
   DateTimeInfo,
   DateTimeLabel,
@@ -12,6 +16,7 @@ import {
 } from "./styles";
 import { Header } from "@/components/Header";
 import { Card } from "@/components/Card";
+import { Button } from "@/components/Button";
 
 interface RouteParams {
   id: string;
@@ -41,6 +46,11 @@ export const Meal = () => {
             {variant === "positive" ? "dentro da dieta" : "fora da dieta"}
           </DietText>
         </DietTag>
+
+        <ButtonWrapper>
+          <Button icon={PencilSimpleLine} title="Editar refeição" />
+          <Button icon={Trash} title="Excluir refeição" variant="secondary" />
+        </ButtonWrapper>
       </Card>
     </Container>
   );
