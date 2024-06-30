@@ -12,11 +12,18 @@ import {
   TextArea,
 } from "./styles";
 import { Button } from "../Button";
+import { useNavigation } from "@react-navigation/native";
 
 export const Form = () => {
   const [selectedDiet, setSelectedDiet] = useState<DietChoiceVariant | null>(
     null
   );
+
+  const { navigate } = useNavigation();
+
+  const handleSubmit = () => {
+    navigate("feedback", { variant: "positive" });
+  };
 
   return (
     <Container>
@@ -60,7 +67,7 @@ export const Form = () => {
       </InputView>
 
       <ButtonWrapper>
-        <Button title="Cadastrar refeição" />
+        <Button title="Cadastrar refeição" onPress={handleSubmit} />
       </ButtonWrapper>
     </Container>
   );

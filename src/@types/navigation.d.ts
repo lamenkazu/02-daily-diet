@@ -1,13 +1,16 @@
-export type StatisticsVariant = "positive" | "negative";
+export type ColorVariant = "positive" | "negative";
 
 export declare global {
   namespace ReactNavigation {
     interface RootParamList {
       home: undefined;
       statistics: {
-        variant: StatisticsVariant;
+        variant: ColorVariant;
       };
       new: undefined;
+      feedback: {
+        variant: ColorVariant;
+      };
       meal: {
         id: string;
       };

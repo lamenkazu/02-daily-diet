@@ -1,4 +1,3 @@
-import { View, Text } from "react-native";
 import { Container } from "./styles";
 import { Card } from "@/components/Card";
 import { Header } from "@/components/Header";
