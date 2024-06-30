@@ -1,7 +1,7 @@
 import PencilSimpleLine from "phosphor-react-native/src/icons/PencilSimpleLine";
 import Trash from "phosphor-react-native/src/icons/Trash";
 
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import {
   ButtonWrapper,
   Container,
@@ -24,8 +24,13 @@ interface RouteParams {
 }
 
 export const Meal = () => {
+  const { navigate } = useNavigation();
   const route = useRoute();
   const { id, variant } = route.params as RouteParams;
+
+  const goToEditMeal = () => {
+    navigate("edit", { id });
+  };
 
   return (
     <Container variant={variant}>
@@ -48,7 +53,11 @@ export const Meal = () => {
         </DietTag>
 
         <ButtonWrapper>
-          <Button icon={PencilSimpleLine} title="Editar refeição" />
+          <Button
+            icon={PencilSimpleLine}
+            title="Editar refeição"
+            onPress={goToEditMeal}
+          />
           <Button icon={Trash} title="Excluir refeição" variant="secondary" />
         </ButtonWrapper>
       </Card>

@@ -15,6 +15,9 @@ export declare global {
         id: string;
         variant: ColorVariant;
       };
+      edit: {
+        id: string;
+      };
     }
   }
 }
