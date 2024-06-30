@@ -22,10 +22,9 @@ export const Container = styled(TouchableOpacity)`
 export const TextView = styled.View`
   flex: 1;
   flex-direction: row;
+  align-items: center;
 
   gap: 12px;
-
-  align-items: center;
 `;
 
 export const Slash = styled.View`

@@ -1,6 +1,7 @@
-import Plus from "phosphor-react-native/src/icons/Plus";
-import { SectionList, Text, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { SectionList } from "react-native";
 
+import Plus from "phosphor-react-native/src/icons/Plus";
 import { Button } from "@/components/Button";
 
 import { Container, Title, DayList } from "./styles";
@@ -24,20 +25,18 @@ export const MealList = () => {
         { id: "6", time: "20:00", inDiet: true, name: "x-tudo" },
       ],
     },
-    {
-      title: "28/06/2024",
-      data: [
-        { id: "7", time: "20:00", inDiet: true, name: "x-tudo" },
-        { id: "8", time: "20:00", inDiet: false, name: "x-tudo" },
-        { id: "9", time: "20:00", inDiet: false, name: "x-tudo" },
-      ],
-    },
   ];
+
+  const { navigate } = useNavigation();
+
+  const goToNewMealScreen = () => {
+    navigate("new");
+  };
 
   return (
     <Container>
       <Title>Refeições</Title>
-      <Button icon={Plus} title="Nova refeição" />
+      <Button icon={Plus} title="Nova refeição" onPress={goToNewMealScreen} />
 
       <SectionList
         sections={DATA}
