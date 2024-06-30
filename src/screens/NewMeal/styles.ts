@@ -8,3 +8,7 @@ export const Container = styled(SafeAreaView)`
 
   background-color: ${({ theme }) => theme.colors.gray_500};
 `;
+
+export const ButtonWrapper = styled.View`
+  margin-top: 40%;
+`;

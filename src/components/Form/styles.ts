@@ -2,7 +2,6 @@ import styled, { css } from "styled-components/native";
 
 export const Container = styled.View`
   width: 100%;
-  flex: 1;
 
   padding-top: 44px;
 
@@ -57,8 +56,4 @@ export const Input = styled.TextInput`
   ${({ theme }) => css`
     border: 1px solid ${theme.colors.gray_500};
   `}
-`;
-
-export const ButtonWrapper = styled.View`
-  margin-top: 40%;
 `;

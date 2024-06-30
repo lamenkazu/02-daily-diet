@@ -2,7 +2,6 @@ import { useState } from "react";
 import { DietChoice } from "../DietChoice";
 import { DietChoiceVariant } from "../DietChoice/styles";
 import {
-  ButtonWrapper,
   Container,
   DateInputView,
   HorizontalInputView,
@@ -11,19 +10,11 @@ import {
   Label,
   TextArea,
 } from "./styles";
-import { Button } from "../Button";
-import { useNavigation } from "@react-navigation/native";
 
 export const Form = () => {
   const [selectedDiet, setSelectedDiet] = useState<DietChoiceVariant | null>(
     null
   );
-
-  const { navigate } = useNavigation();
-
-  const handleSubmit = () => {
-    navigate("feedback", { variant: "positive" });
-  };
 
   return (
     <Container>
@@ -65,10 +56,6 @@ export const Form = () => {
           />
         </HorizontalInputView>
       </InputView>
-
-      <ButtonWrapper>
-        <Button title="Cadastrar refeição" onPress={handleSubmit} />
-      </ButtonWrapper>
     </Container>
   );
 };
