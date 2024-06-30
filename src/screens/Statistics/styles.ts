@@ -31,6 +31,7 @@ export const Subtitle = styled.Text`
 `;
 
 export const StatisticsHeading = styled.Text`
+  text-align: center;
   padding: 36px 0 24px;
 
   ${({ theme }) => css`

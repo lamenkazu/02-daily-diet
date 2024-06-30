@@ -1,3 +1,4 @@
+import { TouchableOpacityProps } from "react-native";
 import {
   Container,
   DietIndicator,
@@ -7,7 +8,7 @@ import {
   Slash,
 } from "./styles";
 
-interface MealItemProps {
+interface MealItemProps extends TouchableOpacityProps {
   details: {
     id: string;
     time: string;
@@ -18,9 +19,10 @@ interface MealItemProps {
 
 export const MealItem = ({
   details: { inDiet, name, time },
+  ...props
 }: MealItemProps) => {
   return (
-    <Container>
+    <Container {...props}>
       <TextView>
         <Time>{time}</Time>
 

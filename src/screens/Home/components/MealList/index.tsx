@@ -33,6 +33,10 @@ export const MealList = () => {
     navigate("new");
   };
 
+  const goToMealScreen = (id: string) => {
+    navigate("meal", { id, variant: "positive" });
+  };
+
   return (
     <Container>
       <Title>Refeições</Title>
@@ -41,7 +45,9 @@ export const MealList = () => {
       <SectionList
         sections={DATA}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <MealItem details={item} />}
+        renderItem={({ item }) => (
+          <MealItem details={item} onPress={() => goToMealScreen(item.id)} />
+        )}
         renderSectionHeader={({ section: { title } }) => (
           <DayList>{title}</DayList>
         )}

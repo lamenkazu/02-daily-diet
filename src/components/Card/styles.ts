@@ -10,6 +10,4 @@ export const Container = styled.View`
   padding: 0 24px;
 
   background-color: ${({ theme }) => theme.colors.white};
-
-  align-items: center;
 `;

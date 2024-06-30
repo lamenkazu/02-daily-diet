@@ -13,6 +13,7 @@ export declare global {
       };
       meal: {
         id: string;
+        variant: ColorVariant;
       };
     }
   }

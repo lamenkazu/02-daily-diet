@@ -27,6 +27,7 @@ export default {
     SM: "14px",
     MD: "16px",
     LG: "18px",
+    LG2: "20px",
     XL: "24px",
     XXL: "32px",
   } as const,
