@@ -28,12 +28,14 @@ export const Form = ({ setMealForm }: FormProps) => {
     null
   );
 
-  useEffect(() => {
+  const handleSelectedDiet = (choice: DietChoiceVariant) => {
+    setSelectedDiet(choice);
+
     setMealForm((prevState) => ({
       ...prevState,
-      inDiet: selectedDiet === "positive" ? true : false,
+      inDiet: choice === "positive" ? true : false,
     }));
-  }, [selectedDiet]);
+  };
 
   return (
     <Container>
@@ -102,12 +104,12 @@ export const Form = ({ setMealForm }: FormProps) => {
           <DietChoice
             variant="positive"
             isSelected={selectedDiet === "positive"}
-            onPress={() => setSelectedDiet("positive")}
+            onPress={() => handleSelectedDiet("positive")}
           />
           <DietChoice
             variant="negative"
             isSelected={selectedDiet === "negative"}
-            onPress={() => setSelectedDiet("negative")}
+            onPress={() => handleSelectedDiet("negative")}
           />
         </HorizontalInputView>
       </InputView>

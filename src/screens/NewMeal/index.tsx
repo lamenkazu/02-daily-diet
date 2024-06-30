@@ -17,13 +17,12 @@ export const NewMeal = () => {
   const handleSubmit = () => {
     const { name, description, inDiet, date, time } = mealForm;
 
-    if (
-      name.length === 0 ||
-      description.length === 0 ||
-      !inDiet ||
-      date.length === 0 ||
-      time.length === 0
-    ) {
+    //Verifica se os campos são ou vazios ou nulos
+    const validateFields = [name, description, date, time];
+    const isEmptyOrUndefined = (field: string | undefined) =>
+      field === undefined || field.length === 0;
+
+    if (validateFields.some(isEmptyOrUndefined) || inDiet === undefined) {
       return Alert.alert(
         "Nova Refeição",
         "Preencha todos os campos para cadastrar a refeição!"
