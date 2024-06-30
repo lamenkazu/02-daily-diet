@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { Alert, Modal } from "react-native";
+import { Modal } from "react-native";
 
 import PencilSimpleLine from "phosphor-react-native/src/icons/PencilSimpleLine";
 import Trash from "phosphor-react-native/src/icons/Trash";

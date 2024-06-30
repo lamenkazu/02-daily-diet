@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { DietChoice } from "../DietChoice";
 import { DietChoiceVariant } from "../DietChoice/styles";
 import {
@@ -11,32 +11,87 @@ import {
   TextArea,
 } from "./styles";
 
-export const Form = () => {
+export interface MealForm {
+  name: string;
+  description: string;
+  date: string;
+  time: string;
+  inDiet: boolean;
+}
+
+interface FormProps {
+  setMealForm: Dispatch<SetStateAction<MealForm>>;
+}
+
+export const Form = ({ setMealForm }: FormProps) => {
   const [selectedDiet, setSelectedDiet] = useState<DietChoiceVariant | null>(
     null
   );
+
+  useEffect(() => {
+    setMealForm((prevState) => ({
+      ...prevState,
+      inDiet: selectedDiet === "positive" ? true : false,
+    }));
+  }, [selectedDiet]);
 
   return (
     <Container>
       <InputView>
         <Label>Nome</Label>
-        <Input />
+        <Input
+          onChangeText={(e) =>
+            setMealForm((prevState) => {
+              return {
+                ...prevState,
+                name: e,
+              };
+            })
+          }
+        />
       </InputView>
 
       <InputView>
         <Label>Descrição</Label>
-        <TextArea />
+        <TextArea
+          onChangeText={(e) =>
+            setMealForm((prevState) => {
+              return {
+                ...prevState,
+                description: e,
+              };
+            })
+          }
+        />
       </InputView>
 
       <HorizontalInputView>
         <DateInputView>
           <Label>Data</Label>
-          <Input />
+          <Input
+            onChangeText={(e) =>
+              setMealForm((prevState) => {
+                return {
+                  ...prevState,
+                  date: e,
+                };
+              })
+            }
+          />
         </DateInputView>
 
         <DateInputView>
           <Label>Hora</Label>
-          <Input />
+          <Input
+            onChangeText={(e) =>
+              setMealForm((prevState) => {
+                return {
+                  ...prevState,
+                  time: e,
+                };
+              })
+            }
+          />
         </DateInputView>
       </HorizontalInputView>
 
