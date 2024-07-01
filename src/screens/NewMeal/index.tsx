@@ -10,6 +10,7 @@ import { Header } from "@/components/Header";
 import { Form, MealForm } from "@/components/Form";
 import { Button } from "@/components/Button";
 import { addMeal } from "@/storage/meals/addMeal";
+import { validateFields } from "@/utils/validateFields";
 
 export const NewMeal = () => {
   const { navigate } = useNavigation();
@@ -19,12 +20,9 @@ export const NewMeal = () => {
   const handleSubmit = async () => {
     const { name, description, inDiet, date, time } = mealForm;
 
-    //Verifica se os campos são ou vazios ou nulos
-    const validateFields = [name, description, date, time];
-    const isEmptyOrUndefined = (field: string | undefined) =>
-      field === undefined || field.length === 0;
+    const validation = validateFields([name, description, date, time]);
 
-    if (validateFields.some(isEmptyOrUndefined) || inDiet === undefined) {
+    if (!validation || inDiet === undefined) {
       return Alert.alert(
         "Nova Refeição",
         "Preencha todos os campos para cadastrar a refeição!"

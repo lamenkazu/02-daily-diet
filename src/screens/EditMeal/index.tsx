@@ -9,6 +9,8 @@ import { Button } from "@/components/Button";
 import { useEffect, useState } from "react";
 import { getMealById } from "@/storage/meals/getMealById";
 import { editMeal } from "@/storage/meals/editMeal";
+import { validateFields } from "@/utils/validateFields";
+import { Alert } from "react-native";
 
 interface RouteParams {
   id: string;
@@ -22,6 +24,17 @@ export const EditMeal = () => {
   const { id } = route.params as RouteParams;
 
   const handleSubmit = async () => {
+    const { name, description, inDiet, date, time } = mealForm;
+
+    const validation = validateFields([name, description, date, time]);
+
+    if (!validation || inDiet === undefined) {
+      return Alert.alert(
+        "Editar Refeição",
+        "Você não pode editar uma refeição com campos vazios."
+      );
+    }
+
     const updatedMeal = {
       id,
       name: mealForm.name,
