@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { fetchMeals } from "./fetchMeals";
 import { MealItem } from "./MealStorageDTO";
 import { MEAL_COLLECTION } from "../storageConfig";
+import { updateStatistics } from "./updateStatistics";
 
 export const editMeal = async (updatedMeal: MealItem) => {
   try {
@@ -27,6 +28,7 @@ export const editMeal = async (updatedMeal: MealItem) => {
     // Converter a lista atualizada para JSON e armazenar no Async Storage
     const mealList = JSON.stringify(updatedMeals);
     await AsyncStorage.setItem(MEAL_COLLECTION, mealList);
+    await updateStatistics();
   } catch (error) {
     throw error;
   }

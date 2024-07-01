@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { fetchMeals } from "./fetchMeals";
 import { MEAL_COLLECTION } from "../storageConfig";
+import { updateStatistics } from "./updateStatistics";
 
 export const removeMealById = async (id: string) => {
   try {
@@ -21,6 +22,7 @@ export const removeMealById = async (id: string) => {
     const mealList = JSON.stringify(updatedMeals);
 
     await AsyncStorage.setItem(MEAL_COLLECTION, mealList);
+    await updateStatistics();
   } catch (error) {
     throw error;
   }

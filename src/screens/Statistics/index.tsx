@@ -1,4 +1,4 @@
-import { useRoute } from "@react-navigation/native";
+import { useFocusEffect, useRoute } from "@react-navigation/native";
 
 import { Header } from "@/components/Header";
 
@@ -12,6 +12,9 @@ import {
 } from "./styles";
 import { Card } from "@/components/Card";
 import { StatisticCard } from "./components/StatisticCard";
+import { useCallback, useState } from "react";
+import { getStatistics } from "@/storage/meals/getStatistics";
+import { StatisticsProps } from "@/storage/meals/MealStorageDTO";
 
 export type StatisticsVariant = "positive" | "negative";
 
@@ -20,16 +23,30 @@ interface RouteParams {
 }
 
 export const Statistics = () => {
-  const route = useRoute();
+  const [statistics, setStatistics] = useState<StatisticsProps>(
+    {} as StatisticsProps
+  );
 
+  const route = useRoute();
   const { variant } = route.params as RouteParams;
+
+  useFocusEffect(
+    useCallback(() => {
+      const fetchStatisticsData = async () => {
+        const data = await getStatistics();
+        setStatistics(data);
+      };
+
+      fetchStatisticsData();
+    }, [])
+  );
 
   return (
     <Container variant={variant}>
       <Header variant={variant} />
 
       <Title>
-        <Percentage>90,86%</Percentage>
+        <Percentage>{statistics.dietPercentage}%</Percentage>
         <Subtitle>das refeições dentro da dieta</Subtitle>
       </Title>
 
@@ -38,21 +55,24 @@ export const Statistics = () => {
 
         <StatisticCard
           label="melhor sequência de pratos dentro da dieta"
-          info={4}
+          info={statistics.bestSequence}
         />
 
-        <StatisticCard label="refeições registradas" info={109} />
+        <StatisticCard
+          label="refeições registradas"
+          info={statistics.totalMeals}
+        />
 
         <DietType>
           <StatisticCard
             variant="positive"
             label="refeições dentro da dieta"
-            info={99}
+            info={statistics.mealsInDiet}
           />
           <StatisticCard
             variant="negative"
             label="refeições fora da dieta"
-            info={10}
+            info={statistics.mealsOutDiet}
           />
         </DietType>
       </Card>
