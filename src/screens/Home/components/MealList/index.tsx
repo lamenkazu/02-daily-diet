@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigation } from "@react-navigation/native";
+import { useCallback, useEffect, useState } from "react";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { SectionList, Text } from "react-native";
 
 import { Button } from "@/components/Button";
@@ -14,16 +14,7 @@ import {
 } from "./styles";
 
 import Plus from "phosphor-react-native/src/icons/Plus";
-/**
- * {
-      title: "30/06/2024",
-      data: [
-        { id: "1", time: "20:00", inDiet: false, name: "x-tudo" },
-        { id: "2", time: "20:00", inDiet: false, name: "x-tudo" },
-        { id: "3", time: "20:00", inDiet: true, name: "x-tudo" },
-      ],
-    },
- */
+import { fetchMeals } from "@/storage/meals/fetchMeals";
 
 interface MealItem {
   id: string;
@@ -42,16 +33,23 @@ export const MealList = () => {
 
   const [meals, setMeals] = useState<MealSection[]>([]);
 
-  // const addMeals = (item: MealItem) => {
-  //   setMeals([...meals, { title: "30/06/2024", data: [item] }]);
-  // };
+  useFocusEffect(
+    useCallback(() => {
+      const fetchMealsData = async () => {
+        const data = await fetchMeals();
+        setMeals(data);
+      };
+
+      fetchMealsData();
+    }, [])
+  );
 
   const goToNewMealScreen = () => {
     navigate("new");
   };
 
-  const goToMealScreen = (id: string) => {
-    navigate("meal", { id, variant: "positive" });
+  const goToMealScreen = (id: string, inDiet: boolean) => {
+    navigate("meal", { id, variant: inDiet ? "positive" : "negative" });
   };
 
   return (
@@ -63,7 +61,10 @@ export const MealList = () => {
         sections={meals}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <MealItem details={item} onPress={() => goToMealScreen(item.id)} />
+          <MealItem
+            details={item}
+            onPress={() => goToMealScreen(item.id, item.inDiet)}
+          />
         )}
         renderSectionHeader={({ section: { title } }) => (
           <DayList>{title}</DayList>

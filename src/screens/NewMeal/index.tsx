@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { Alert } from "react-native";
+import uuid from "react-native-uuid";
 
 import { Container, ButtonWrapper } from "./styles";
 
@@ -7,14 +9,14 @@ import { Card } from "@/components/Card";
 import { Header } from "@/components/Header";
 import { Form, MealForm } from "@/components/Form";
 import { Button } from "@/components/Button";
-import { Alert } from "react-native";
+import { addMeal } from "@/storage/meals/addMeal";
 
 export const NewMeal = () => {
   const { navigate } = useNavigation();
 
   const [mealForm, setMealForm] = useState<MealForm>({} as MealForm);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const { name, description, inDiet, date, time } = mealForm;
 
     //Verifica se os campos são ou vazios ou nulos
@@ -29,9 +31,25 @@ export const NewMeal = () => {
       );
     }
 
-    //TODO cadastrar refeição no storage.
+    // Cria um novo MealItem com um ID único
+    const newMeal = {
+      id: String(uuid.v4()),
+      name,
+      description,
+      date,
+      time,
+      inDiet,
+    };
 
-    navigate("feedback", { variant: "positive" });
+    try {
+      await addMeal(newMeal);
+      navigate("feedback", { variant: "positive" });
+    } catch (error) {
+      Alert.alert(
+        "Erro",
+        "Não foi possível cadastrar a refeição. Tente novamente."
+      );
+    }
   };
   return (
     <Container>

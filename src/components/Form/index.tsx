@@ -20,10 +20,12 @@ export interface MealForm {
 }
 
 interface FormProps {
+  mealForm?: MealForm;
+  isEdit?: boolean;
   setMealForm: Dispatch<SetStateAction<MealForm>>;
 }
 
-export const Form = ({ setMealForm }: FormProps) => {
+export const Form = ({ setMealForm, isEdit, mealForm }: FormProps) => {
   const [selectedDiet, setSelectedDiet] = useState<DietChoiceVariant | null>(
     null
   );
@@ -37,11 +39,18 @@ export const Form = ({ setMealForm }: FormProps) => {
     }));
   };
 
+  useEffect(() => {
+    if (mealForm && isEdit !== undefined) {
+      setSelectedDiet(mealForm.inDiet ? "positive" : "negative");
+    }
+  }, [mealForm, isEdit]);
+
   return (
     <Container>
       <InputView>
         <Label>Nome</Label>
         <Input
+          value={mealForm?.name}
           onChangeText={(e) =>
             setMealForm((prevState) => {
               return {
@@ -56,6 +65,7 @@ export const Form = ({ setMealForm }: FormProps) => {
       <InputView>
         <Label>Descrição</Label>
         <TextArea
+          value={mealForm?.description}
           onChangeText={(e) =>
             setMealForm((prevState) => {
               return {
@@ -71,6 +81,7 @@ export const Form = ({ setMealForm }: FormProps) => {
         <DateInputView>
           <Label>Data</Label>
           <Input
+            value={mealForm?.date}
             onChangeText={(e) =>
               setMealForm((prevState) => {
                 return {
@@ -85,6 +96,7 @@ export const Form = ({ setMealForm }: FormProps) => {
         <DateInputView>
           <Label>Hora</Label>
           <Input
+            value={mealForm?.time}
             onChangeText={(e) =>
               setMealForm((prevState) => {
                 return {
